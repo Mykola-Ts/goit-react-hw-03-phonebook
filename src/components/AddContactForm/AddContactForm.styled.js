@@ -19,7 +19,7 @@ export const ContactInput = styled.input`
   padding: 8px 16px;
   margin-top: 8px;
 
-  outline: 1px solid transparent;
+  outline: 2px solid transparent;
 
   transition: border-color var(--transition-duration)
       var(--transition-timing-function),

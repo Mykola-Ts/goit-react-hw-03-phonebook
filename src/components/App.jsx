@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import toast, { Toaster } from 'react-hot-toast';
 import { Layout } from './Layout';
 import { GlobalStyle } from './GlobalStyle';
 import { Section } from './Section/Section';
@@ -8,7 +8,7 @@ import { AddContactForm } from './AddContactForm/AddContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './Contacts/Contacts';
 import { NoContactsText } from './App.styled';
-import { optionsNotifyWarning, closeNotifyMessage } from 'js/notifyMessage';
+import { toastOptions } from './helpers/helpers';
 
 export class App extends Component {
   state = {
@@ -26,13 +26,12 @@ export class App extends Component {
     );
 
     if (isIncludesName || isIncludesNumber) {
-      closeNotifyMessage();
-
       const warningText = `${
         isIncludesName ? name : `Number ${number}`
       } is already in contacts`;
 
-      Notify.warning(warningText, optionsNotifyWarning);
+      toast.remove();
+      toast.error(warningText);
 
       return null;
     }
@@ -48,14 +47,22 @@ export class App extends Component {
       ],
     }));
 
-    closeNotifyMessage();
-    Notify.success(`${name} added to contacts`);
+    toast.remove();
+    toast.success(`${name} added to contacts`);
   };
 
   onDeleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(({ id }) => id !== contactId),
-    }));
+    this.setState(prevState => {
+      const deletedContact = prevState.contacts.find(
+        ({ id }) => id === contactId
+      );
+
+      toast.remove();
+      toast.success(`${deletedContact.name} deleted from contacts`);
+      return {
+        contacts: prevState.contacts.filter(({ id }) => id !== contactId),
+      };
+    });
   };
 
   onFilterContacts = findName => {
@@ -119,6 +126,8 @@ export class App extends Component {
             <NoContactsText>No contacts</NoContactsText>
           )}
         </Section>
+
+        <Toaster position="top-right" toastOptions={toastOptions} />
 
         <GlobalStyle />
       </Layout>

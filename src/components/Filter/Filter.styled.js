@@ -15,9 +15,10 @@ export const FilterInput = styled.input`
   padding: 8px 16px;
   margin-top: 8px;
 
-  outline: transparent;
+  outline: 2px solid transparent;
 
   &:focus {
-    border-color: var(--blue-color);
+    border-color: transparent;
+    outline-color: var(--blue-color);
   }
 `;

@@ -19,10 +19,10 @@ export class AddContactForm extends Component {
   };
 
   onSubmit = evt => {
+    evt.preventDefault();
+
     const { state, props } = this;
     const { onAddContact } = props;
-
-    evt.preventDefault();
 
     const isIncludesName = onAddContact(state);
 
