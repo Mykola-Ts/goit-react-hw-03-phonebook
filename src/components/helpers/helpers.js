@@ -1,22 +1,22 @@
 export const toastOptions = {
-  duration: 5000,
+  duration: 4000,
   success: {
     style: {
       color: 'var(--white-color)',
-      background: 'rgba(0, 128, 0, 0.7)',
+      background: 'var(--success-color)',
     },
     iconTheme: {
-      primary: 'white',
+      primary: 'var(--white-color)',
       secondary: 'green',
     },
   },
   error: {
     style: {
       color: 'var(--white-color)',
-      background: 'rgba(255, 85, 73, 0.9)',
+      background: 'var(--error-color)',
     },
     iconTheme: {
-      primary: 'white',
+      primary: 'var(--white-color)',
       secondary: 'rgb(255, 85, 73)',
     },
   },

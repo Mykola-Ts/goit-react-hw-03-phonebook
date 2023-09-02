@@ -54,6 +54,8 @@ export const GlobalStyle = createGlobalStyle`
   --white-color: #fff;
   --red-color: #ff0000;
   --blue-color: #5050fb;
+  --error-color: rgba(255, 85, 73, 0.9);
+  --success-color: rgba(0, 128, 0, 0.7);
 
   --box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
   0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);

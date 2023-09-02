@@ -1,8 +1,7 @@
 import styled from 'styled-components';
+import { Field } from 'formik';
 
 export const ContactLabel = styled.label`
-  position: relative;
-
   display: block;
 
   margin-bottom: 28px;
@@ -10,7 +9,7 @@ export const ContactLabel = styled.label`
   font-weight: 700;
 `;
 
-export const ContactInput = styled.input`
+export const ContactInput = styled(Field)`
   display: block;
 
   width: 100%;
@@ -53,4 +52,12 @@ var(--transition-timing-function);
 &:is(:hover, :focus, :active) {
 color: var(--white-color);
 background-color: var(--blue-color);
+`;
+
+export const Error = styled.p`
+  padding: 4px;
+
+  font-weight: 500;
+
+  color: var(--error-color);
 `;

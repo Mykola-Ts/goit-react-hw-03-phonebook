@@ -16,7 +16,7 @@ export class App extends Component {
     filter: '',
   };
 
-  onAddContact = ({ name, number }) => {
+  onAddContact = (name, number) => {
     const { contacts } = this.state;
     const isIncludesName = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -59,6 +59,7 @@ export class App extends Component {
 
       toast.remove();
       toast.success(`${deletedContact.name} deleted from contacts`);
+
       return {
         contacts: prevState.contacts.filter(({ id }) => id !== contactId),
       };
