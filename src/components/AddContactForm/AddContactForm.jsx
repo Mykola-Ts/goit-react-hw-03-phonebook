@@ -12,18 +12,22 @@ import {
 const contactSchema = object({
   name: string()
     .required('This field is required!')
-    .min(
-      2,
-      'The name is short! Please enter a name with at least 2 characters.'
-    )
     .matches(
       "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]?[- ']*)*$",
       `Name may contain only letters, apostrophe, dash and spaces.
       For example Adrian, Jacob Mercer Charles de Batz de Castelmore d'Artagnan`
     )
+    .min(
+      2,
+      'The name is short! Please enter a name with at least 2 characters.'
+    )
     .trim(),
   number: string()
     .required('This field is required!')
+    .matches(
+      /^(\+?\d+)?\s*(\(\d+\))?[\s-]*([\d-]*)$/,
+      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +.'
+    )
     .min(
       5,
       'The number is short! Please enter a number with at least 5 characters.'
@@ -31,10 +35,6 @@ const contactSchema = object({
     .max(
       18,
       'The number is long! Please enter a number with at more 18 characters.'
-    )
-    .matches(
-      /^(\+?\d+)?\s*(\(\d+\))?[\s-]*([\d-]*)$/,
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +.'
     ),
 });
 

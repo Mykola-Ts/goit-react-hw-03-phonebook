@@ -8,11 +8,7 @@ export const Contact = ({ id, name, number, onDelete }) => {
       <ContactInfo>{`${name}: `}</ContactInfo>
       <ContactNumber>{number}</ContactNumber>
 
-      <Button
-        type="button"
-        onClick={evt => onDelete(evt.currentTarget.id)}
-        id={id}
-      >
+      <Button type="button" onClick={() => onDelete(id, name)}>
         <GoTrash size={20} />
         <p>Delete</p>
       </Button>

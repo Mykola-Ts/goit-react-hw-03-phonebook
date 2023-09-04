@@ -16,6 +16,30 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const savedContacts = localStorage.getItem('contacts');
+
+    if (savedContacts === null) {
+      return;
+    }
+
+    const contacts = JSON.parse(savedContacts);
+
+    if (!contacts.length) {
+      return;
+    }
+
+    this.setState({ contacts });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
+
   onAddContact = (name, number) => {
     const { contacts } = this.state;
     const isIncludesName = contacts.find(
@@ -51,50 +75,18 @@ export class App extends Component {
     toast.success(`${name} added to contacts`);
   };
 
-  onDeleteContact = contactId => {
-    this.setState(prevState => {
-      const deletedContact = prevState.contacts.find(
-        ({ id }) => id === contactId
-      );
+  onDeleteContact = (contactDeleteId, contactDeleteName) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(({ id }) => id !== contactDeleteId),
+    }));
 
-      toast.remove();
-      toast.success(`${deletedContact.name} deleted from contacts`);
-
-      return {
-        contacts: prevState.contacts.filter(({ id }) => id !== contactId),
-      };
-    });
+    toast.remove();
+    toast.success(`${contactDeleteName} deleted from contacts`);
   };
 
   onFilterContacts = findName => {
     this.setState({ filter: findName });
   };
-
-  componentDidMount() {
-    const savedContacts = localStorage.getItem('contacts');
-
-    if (savedContacts === null) {
-      return;
-    }
-
-    const contacts = JSON.parse(savedContacts);
-
-    if (!contacts.length) {
-      return;
-    }
-
-    this.setState({ contacts });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { contacts } = this.state;
-
-    if (prevState.contacts === contacts) {
-      return;
-    }
-
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }
 
   render() {
     const { state, onAddContact, onDeleteContact, onFilterContacts } = this;
